@@ -40,11 +40,10 @@ pipeline {
         }
         stage('build sa-logic') {
             steps {
-                sh "ls -la"
                 dir('sa-logic/sa') {
                     sh 'ls -la'
-                    sh 'python -m pip install -r requirements.txt'
-                    sh 'python -m textblob.download_corpora'
+                    sh 'python3 -m pip install -r requirements.txt'
+                    sh 'python3 -m textblob.download_corpora'
                 }
             }
         }
