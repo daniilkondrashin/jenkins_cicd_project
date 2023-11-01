@@ -48,6 +48,22 @@ pipeline {
                 }
             }
         }
-
+        stage('docker build') {
+            steps {
+                dir('sa-frontend') {
+                    sh 'ls -la'
+                    sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-frontend .'
+                }
+            }
+        }
+        stage('Push docker image to DockerHub') {
+            steps{
+                withDockerRegistry(credentialsId: 'dockerhub-cred-daniil', url: 'https://index.docker.io/v1/') {
+                    sh '''
+                        docker push daniil3680/sentiment-analysis-frontend:latest
+                    '''
+                }
+            }
+        }
     }
 }
