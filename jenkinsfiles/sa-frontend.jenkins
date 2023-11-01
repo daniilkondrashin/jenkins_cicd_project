@@ -38,7 +38,7 @@ pipeline {
                     git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_test1.git'      
                 }
         }
-        stage('Ls work dir') {
+        stage('build sa-frontend') {
             steps {
                 sh "ls -la"
                 dir('sa-frontend') {
