@@ -1,8 +1,10 @@
 #!groovy
 // Check ub1 properties
+properties([disableConcurrentBuilds()])
+
 pipeline {
     agent { label 'ubuntu' }
-
+    triggers { pollSCM('* * * * *') }
     parameters {
         gitParameter (  branch: '', 
                         branchFilter: 'origin/(.*)', 
@@ -14,7 +16,7 @@ pipeline {
                         sortMode: 'DESCENDING', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH', 
-                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git') // M
+                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git')
     }
 
     stages {
