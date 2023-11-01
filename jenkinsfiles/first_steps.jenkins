@@ -14,7 +14,7 @@ pipeline {
                         sortMode: 'DESCENDING', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH', 
-                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git')
+                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git') // M
     }
 
     stages {
