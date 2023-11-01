@@ -38,30 +38,30 @@ pipeline {
                     git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_test1.git'      
                 }
         }
-        stage('build sa-frontend') {
+        stage('build sa-logic') {
             steps {
                 sh "ls -la"
-                dir('sa-webapp') {
+                dir('sa-logic/sa') {
                     sh 'ls -la'
                     sh 'mvn install'
                     sh 'java -jar sentiment-analysis-web-0.0.1-SNAPSHOT.jar --sa.logic.api.url=http://localhost:5000'
                 }
             }
         }
-        stage('sa-webapp') {
+        stage('docker build sa-logic') {
             steps {
-                dir('sa-frontend') {
+                dir('sa-logic') {
                     sh 'ls -la'
-                    sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-web-app .'
+                    sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-logic .'
                 }
             }
         }
         stage('Push docker image to DockerHub') {
             steps{
-                dir('sa-webapp') {
+                dir('sa-logic') {
                     withDockerRegistry(credentialsId: 'dockerhub-cred-daniil', url: 'https://index.docker.io/v1/') {
                         sh '''
-                            docker push daniil3680/sentiment-analysis-web-app:latest
+                            docker push daniil3680/sentiment-analysis-logic:latest
                         '''
                     }
                 }

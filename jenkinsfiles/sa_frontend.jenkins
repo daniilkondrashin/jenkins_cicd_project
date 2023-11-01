@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-        stage('docker build') {
+        stage('docker build sa-frontend') {
             steps {
                 dir('sa-frontend') {
                     sh 'ls -la'
