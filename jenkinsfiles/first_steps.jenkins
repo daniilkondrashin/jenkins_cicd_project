@@ -1,0 +1,51 @@
+#!groovy
+// Check ub1 properties
+pipeline {
+    agent { label 'ubuntu' }
+
+    parameters {
+        gitParameter (  branch: '', 
+                        branchFilter: 'origin/(.*)', 
+                        defaultValue: 'master', 
+                        description: '', 
+                        name: 'BRANCH', 
+                        quickFilterEnabled: true, 
+                        selectedValue: 'TOP', 
+                        sortMode: 'DESCENDING', 
+                        tagFilter: '*', 
+                        type: 'PT_BRANCH', 
+                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git')
+    }
+
+    stages {
+        stage('Delete workspace before build starts') {
+            steps {
+                echo 'Deleting workspace'
+                deleteDir()
+            }
+        }
+        stage('Env print') {
+            steps {
+                sh '''
+                    echo $BRANCH
+                '''
+            }
+        }
+        stage('Checkout') {
+            steps{
+                    git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_test1.git'      
+                }
+        }
+        stage('Ls work dir') {
+            steps {
+                sh "ls -la"
+                dir('sa-frontend') {
+                    sh 'ls -la'
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+    }
+}
