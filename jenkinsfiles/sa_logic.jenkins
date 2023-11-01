@@ -43,6 +43,7 @@ pipeline {
                 dir('sa-logic/sa') {
                     sh 'ls -la'
                     sh 'python3 -m pip install --default-timeout=100 -r requirements.txt'
+                    sh 'pip install -U textblob'
                     sh 'python3 -m textblob.download_corpora'
                 }
             }
