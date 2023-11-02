@@ -3,7 +3,7 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    agent { label 'ubuntu' }
+    agent { label 'master' }
     triggers { pollSCM('* * * * *') }
     parameters {
         gitParameter (  branch: '', 
@@ -37,6 +37,16 @@ pipeline {
             steps{
                     git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_test1.git'      
                 }
+        }
+        stage('build sa-logic') {
+            steps {
+                dir('sa-logic/sa') {
+                    sh 'ls -la'
+                    sh 'python3 -m pip install --default-timeout=100 -r requirements.txt'
+                    sh 'pip install --default-timeout=100 -U textblob'
+                    sh 'python3 -m textblob.download_corpora'
+                }
+            }
         }
         stage('docker build sa-logic') {
             steps {

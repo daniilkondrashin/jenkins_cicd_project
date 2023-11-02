@@ -3,7 +3,7 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    agent { label 'ubuntu' }
+    agent { label 'master' }
     triggers { pollSCM('* * * * *') }
     parameters {
         gitParameter (  branch: '', 
