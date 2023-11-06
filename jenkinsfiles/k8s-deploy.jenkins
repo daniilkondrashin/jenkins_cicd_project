@@ -3,14 +3,15 @@
 properties([disableConcurrentBuilds()])
 pipeline {
     agent { label 'k8s-node' }
-    triggers { upstream(upstreamProjects: 'sa-frontend', threshold: hudson.model.Result.SUCCESS) }
+    triggers { upstream(upstreamProjects: 'sa-frontend, sa-logic, sa_webapp', threshold: hudson.model.Result.SUCCESS) }
     stages {
         stage('deploy sa-frontend') {
             steps {
-                sh "kubectl get deploy"
-                sleep 10
+                sleep 60
                 dir('resource-manifests') {
                     sh 'kubectl apply -f deploy-sa-frontend.yaml'
+                    sh 'kubectl apply -f deoloy-sa-logic.yaml'
+                    sh 'kubectl apply -f deploy-sa-web-app.yaml'
                 }
             }
         }

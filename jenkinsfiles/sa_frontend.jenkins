@@ -40,9 +40,7 @@ pipeline {
         }
         stage('build sa-frontend') {
             steps {
-                sh "ls -la"
                 dir('sa-frontend') {
-                    sh 'ls -la'
                     sh 'npm install'
                     sh 'npm run build'
                 }
@@ -51,7 +49,6 @@ pipeline {
         stage('docker build sa-frontend') {
             steps {
                 dir('sa-frontend') {
-                    sh 'ls -la'
                     sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-frontend .'
                 }
             }

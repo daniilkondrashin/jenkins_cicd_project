@@ -41,7 +41,6 @@ pipeline {
         stage('build sa-logic') {
             steps {
                 dir('sa-logic/sa') {
-                    sh 'ls -la'
                     sh 'python3 -m pip install --default-timeout=100 -r requirements.txt'
                     sh 'pip install --default-timeout=100 -U textblob'
                     sh 'python3 -m textblob.download_corpora'
@@ -51,7 +50,6 @@ pipeline {
         stage('docker build sa-logic') {
             steps {
                 dir('sa-logic') {
-                    sh 'ls -la'
                     sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-logic .'
                 }
             }

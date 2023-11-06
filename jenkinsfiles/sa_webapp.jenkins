@@ -48,7 +48,6 @@ pipeline {
         stage('docker build sa-webapp') {
             steps {
                 dir('sa-webapp') {
-                    sh 'ls -la'
                     sh 'docker build -f Dockerfile -t daniil3680/sentiment-analysis-web-app .'
                 }
             }
