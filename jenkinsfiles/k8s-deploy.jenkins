@@ -3,7 +3,7 @@
 properties([disableConcurrentBuilds()])
 pipeline {
     agent { label 'k8s-node' }
-    triggers { upstream(upstreamProjects: 'sa-frontend, sa-logic, sa_webapp', threshold: hudson.model.Result.SUCCESS) }
+    triggers { upstream(upstreamProjects: 'sa-frontend,sa-logic,sa_webapp', threshold: hudson.model.Result.SUCCESS) }
     stages {
         stage('deploy sa-frontend') {
             steps {
