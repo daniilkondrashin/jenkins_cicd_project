@@ -16,7 +16,7 @@ pipeline {
                         sortMode: 'DESCENDING', 
                         tagFilter: '*', 
                         type: 'PT_BRANCH', 
-                        useRepository: 'git@github.com:daniilkondrashin/jenkins_test1.git')
+                        useRepository: 'git@github.com:daniilkondrashin/jenkins_cicd_project.git')
     }
 
     stages {
@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Checkout') {
             steps{
-                    git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_test1.git'      
+                    git branch: "${params.BRANCH}", credentialsId: 'github-daniil-web-app-cred', url: 'git@github.com:daniilkondrashin/jenkins_cicd_project.git'      
                 }
         }
         stage('build sa-frontend') {
