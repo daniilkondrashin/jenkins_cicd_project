@@ -10,3 +10,5 @@ spec:
     targetPort: 80         # 5
   selector:                # 6
     app: sa-frontend       # 7
+  externalIps:
+  - 192.168.64.2
