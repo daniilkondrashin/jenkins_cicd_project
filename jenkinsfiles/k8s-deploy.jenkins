@@ -10,7 +10,7 @@ pipeline {
                 sleep 60
                 dir('resource-manifests') {
                     sh 'kubectl apply -f deploy-sa-frontend.yaml'
-                    sh 'kubectl apply -f deoloy-sa-logic.yaml'
+                    sh 'kubectl apply -f deploy-sa-logic.yaml'
                     sh 'kubectl apply -f deploy-sa-web-app.yaml'
                     sh 'kubectl apply -f service-sa-frontend-lb.yaml'
                     sh 'kubectl apply -f service-sa-logic.yaml'
